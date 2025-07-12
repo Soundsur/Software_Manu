@@ -10,9 +10,9 @@ class Command(BaseCommand):
         # Credenciales predefinidas
         users_to_create = [
             {
-                'username': 'admin',
-                'password': 'admin123',
-                'email': 'juan@manumarket.com',
+                'username': 'luna',
+                'password': 'luna123',
+                'email': 'manumarket1775@gmail.com',
                 'first_name': 'Juan',
                 'last_name': 'Negrete',
                 'role': 'ADMIN',
@@ -21,11 +21,11 @@ class Command(BaseCommand):
                 'is_active': True
             },
             {
-                'username': 'seba',
-                'password': 'worker123',
+                'username': 'pamela',
+                'password': 'pamela123',
                 'email': 'trabajador@manumarket.com',
-                'first_name': 'Sebastian',
-                'last_name': 'Alonzo',
+                'first_name': 'Pamela',
+                'last_name': 'Apellido',
                 'role': 'EMPLOYEE',
                 'is_staff': False,
                 'is_superuser': False,
