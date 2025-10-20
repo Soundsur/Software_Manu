@@ -28,6 +28,7 @@ services:
       - "8000:8000"
     depends_on:
       - db
+      - bus  # Asegurando que el backend dependa del BUS
     env_file:
       - .env
 
@@ -44,5 +45,21 @@ services:
     depends_on:
       - ventas_api
 
+  bus:
+    image: jrgiadach/soabus
+    container_name: soabus
+    ports:
+      - "5000:5000"  # Puerto del BUS
+    environment:
+      - SOME_ENV_VAR=value  # Si el BUS necesita alguna variable de entorno
+    restart: always
+    networks:
+      - manumarket-network
+
+
 volumes:
   manumarket-data:
+
+networks:
+  manumarket-network:
+    driver: bridge
