@@ -17,8 +17,7 @@ from drf_yasg import openapi
 import base64
 import gzip
 import json
-
-
+from .bus_communication import BusCommunication  # Importar la clase BusCommunication
 from .serializers import (
     InputItemDTO,
     InputTransaccionSerializer,
@@ -27,6 +26,32 @@ from .serializers import (
     StockSerializer,
     HistorialVentasSerializer,
 )
+
+# ------------------------------
+# SOA BS
+# ------------------------------
+
+class UserLoginView(APIView):
+    def post(self, request, *args, **kwargs):
+        # Recibir los datos de login (por ejemplo, username y password)
+        username = request.data.get("username")
+        password = request.data.get("password")
+
+        # Crear la transacción que se enviará al bus de servicios
+        service = "auth_s"  # Nombre del servicio (auth_service)
+        data = f"{username}{password}"  # Datos de la autenticación (ajustar según lo que necesites)
+
+        # Crear instancia de BusCommunication para interactuar con el bus
+        bus_communication = BusCommunication()
+
+        # Enviar la transacción al bus
+        transaction_response = bus_communication.send_transaction(service, data)
+
+        # Procesar la respuesta del bus
+        if "OK" in transaction_response:
+            return Response({"message": "Login successful"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"message": "Invalid credentials"}, status=status.HTTP_400_BAD_REQUEST)
 
 # ------------------------------
 # CRUD de Productos
