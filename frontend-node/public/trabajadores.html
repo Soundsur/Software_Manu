@@ -319,6 +319,7 @@
     <script>
       // BASE URL de tu API Django (ventas_api)
       const BACKEND_URL = "http://localhost:8000";
+      const AUTH_URL = "http://localhost:8001";
       let currentUser = null;
       let isEditing = false;
 
@@ -347,7 +348,7 @@
         }
 
         try {
-          const resp = await fetch(`${BACKEND_URL}/ventas/user/me/`, {
+          const resp = await fetch(`${AUTH_URL}/auth/user/me/`, {
             headers: { "Authorization": `Bearer ${token}` }
           });
           
@@ -374,7 +375,7 @@ document.getElementById("userInfo").textContent = `${displayName} (${roleName})`
       async function loadUsers() {
         const token = localStorage.getItem("token");
         try {
-          const resp = await fetch(`${BACKEND_URL}/ventas/usuarios/`, {
+          const resp = await fetch(`${AUTH_URL}/auth/usuarios/`, {
             headers: { "Authorization": `Bearer ${token}` }
           });
           
@@ -470,7 +471,7 @@ document.getElementById("userInfo").textContent = `${displayName} (${roleName})`
         
         try {
           setLoading(true);
-          const resp = await fetch(`${BACKEND_URL}/ventas/usuarios/${userId}/`, {
+          const resp = await fetch(`${AUTH_URL}/auth/usuarios/${userId}/`, {
             headers: { "Authorization": `Bearer ${token}` }
           });
           
@@ -510,7 +511,7 @@ document.getElementById("userInfo").textContent = `${displayName} (${roleName})`
         
         try {
           setLoading(true);
-          const resp = await fetch(`${BACKEND_URL}/ventas/usuarios/${userId}/`, {
+          const resp = await fetch(`${AUTH_URL}/auth/usuarios/${userId}/`, {
             method: "DELETE",
             headers: { "Authorization": `Bearer ${token}` }
           });

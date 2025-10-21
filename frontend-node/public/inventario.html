@@ -527,6 +527,7 @@
     <script>
       // BASE URL de tu API Django (ventas_api)
       const BACKEND_URL = "http://localhost:8000";
+      const AUTH_URL = "http://localhost:8001";
       const token = localStorage.getItem("token");
       // Agrega el header Authorization si hay token
       const headers = token
@@ -1564,7 +1565,7 @@
         }
 
         try {
-          const resp = await fetch(`${BACKEND_URL}/ventas/user/me/`, {
+          const resp = await fetch(`${AUTH_URL}/auth/user/me/`, {
             headers: { "Authorization": `Bearer ${token}` }
           });
           

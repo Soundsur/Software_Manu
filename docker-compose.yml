@@ -13,6 +13,8 @@ services:
       - manumarket-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - manumarket-network  # Conectando db a la red
 
 
   ventas_api:
@@ -31,6 +33,8 @@ services:
       - bus  # Asegurando que el backend dependa del BUS
     env_file:
       - .env
+    networks:
+      - manumarket-network  # Asegurarse de que esté en la misma red
 
   frontend_node:
     image: node:18-alpine
@@ -44,6 +48,8 @@ services:
       - "3000:3000"
     depends_on:
       - ventas_api
+    networks:
+      - manumarket-network  
 
   bus:
     image: jrgiadach/soabus
@@ -61,6 +67,7 @@ services:
       context: .  # Usar el Dockerfile de la raíz
       dockerfile: Dockerfile  # Especifica que use el Dockerfile de la raíz
     container_name: auth_service
+    restart: always
     volumes:
       - ./backend:/app  # Esto monta la carpeta backend que incluye auth_service y ventas
     ports:
@@ -69,6 +76,8 @@ services:
       - db
     env_file:
       - .env
+    networks:
+      - manumarket-network  # Asegurarse de que esté en la misma red
 
 volumes:
   manumarket-data:

@@ -393,6 +393,7 @@
       
       // BASE URL de tu API Django
       const BACKEND_URL = "http://localhost:8000";
+      const AUTH_URL = "http://localhost:8001";
       let currentUser = null;
       let salesChart = null;
 
@@ -496,7 +497,7 @@
         }
 
         try {
-          const respUser = await fetch(`${BACKEND_URL}/ventas/user/me/`, {
+          const respUser = await fetch(`${AUTH_URL}/auth/user/me/`, {
             headers: { "Authorization": `Bearer ${token}` }
           });
           

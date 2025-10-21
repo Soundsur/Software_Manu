@@ -532,7 +532,7 @@ let usuarioActual = null;
 async function obtenerUsuarioActual() {
     try {
         const tokenLocal = localStorage.getItem('token');
-        const response = await fetch(`${BACKEND_URL}/ventas/user/me/`, {
+        const response = await fetch(`${AUTH_URL}/auth/user/me/`, {
             method: 'GET',
             headers: tokenLocal
                 ? { 'Authorization': `Bearer ${tokenLocal}`, 'Content-Type': 'application/json' }
@@ -574,6 +574,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // 3) URL base del backend Django
       const BACKEND_URL = "http://localhost:8000";
+      const AUTH_URL = "http://localhost:8001";
+
       const token = localStorage.getItem("token");
       const headers = token
         ? { "Content-Type": "application/json", "Authorization": `Bearer ${token}` }
@@ -1221,7 +1223,7 @@ function ajustarCantidades() {
         }
 
         try {
-          const resp = await fetch(`${BACKEND_URL}/ventas/user/me/`, {
+          const resp = await fetch(`${AUTH_URL}/auth/user/me/`, {
             headers: { "Authorization": `Bearer ${token}` }
           });
           

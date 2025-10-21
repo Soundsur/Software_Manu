@@ -28,6 +28,7 @@
     <script>
       lucide.createIcons();
       const BACKEND_URL = "http://localhost:8000";
+      const AUTH_URL = "http://localhost:8001";
         
         document.addEventListener("DOMContentLoaded", async () => {
             const token = localStorage.getItem("token");
@@ -35,7 +36,7 @@
             if (token) {
                 try {
                     // Intentar cerrar sesión en el backend
-                    await fetch(`${BACKEND_URL}/ventas/user/logout/`, {
+                    await fetch(`${AUTH_URL}/auth/user/logout/`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",

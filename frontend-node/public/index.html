@@ -138,7 +138,7 @@
       lucide.createIcons();
       
       // Base URL de tu API Django (ventas_api)
-      const BACKEND_URL = "http://localhost:8000";
+      const BACKEND_URL = "http://localhost:8001";
 
       // Elementos DOM
       const formLogin = document.getElementById("formLogin");
@@ -240,11 +240,11 @@
           showToast("Por favor complete todos los campos", "warning");
           return;
         }
-
+         
         setLoading(true);
 
         try {
-          const resp = await fetch(`${BACKEND_URL}/ventas/user/login/`, {
+          const resp = await fetch(`${BACKEND_URL}/auth/user/login/`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username, password }),
