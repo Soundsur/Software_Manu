@@ -1,6 +1,7 @@
+# auth_service/management/commands/create_admin.py
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError
-from ventas.models import User
+from auth_service.models import User
 
 
 class Command(BaseCommand):

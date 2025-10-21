@@ -2,9 +2,6 @@
 
 from django.urls import path, include
 from .views import (
-    MyTokenObtainPairView,
-    LogoutView,
-    MeView,
     # Transacciones:
     TransaccionCreateAPIView,
     TransaccionDetailAPIView,
@@ -21,30 +18,10 @@ from .views import (
     MetricsView,
     DashboardMetricsView, # Added import
     SalesChartDataView,   # Added import
-    # Gestión de usuarios:
-    UserListCreateAPIView,
-    UserDetailAPIView,
-    UserProfileAPIView,
-    UsuarioActualAPIView,
 )
-from rest_framework_simplejwt.views import TokenRefreshView
 
-auth_urls = [
-    path('login/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('logout/', LogoutView.as_view(), name='auth_logout'),
-    path('me/', MeView.as_view(), name='auth_me'),
-    path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-]
 
 urlpatterns = [
-    # Rutas de autenticación
-    path('user/', include(auth_urls)),
-
-    # --- Gestión de Usuarios (solo para administradores) ---
-    path('usuarios/', UserListCreateAPIView.as_view(), name='user-list-create'),
-    path('usuarios/<int:pk>/', UserDetailAPIView.as_view(), name='user-detail'),
-    path('profile/', UserProfileAPIView.as_view(), name='user-profile'),
-    path('usuario-actual/', UsuarioActualAPIView.as_view(), name='usuario-actual'),
 
     # --- Gestión de Transacciones ---
     # 1) Crear una Transacción (con lista de items y descuento global):

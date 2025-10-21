@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'ventas',
     "corsheaders",
     'drf_yasg',
+    'auth_service',  # Agregar el nuevo servicio Autenticación
 ]
 
 AUTH_USER_MODEL = 'ventas.User'
