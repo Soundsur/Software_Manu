@@ -1,5 +1,6 @@
 # auth_service/urls.py
-from django.urls import path
+
+from django.urls import path, include
 from rest_framework_simplejwt.views import TokenRefreshView
 from .views import (
     MyTokenObtainPairView,
@@ -21,13 +22,11 @@ auth_urls = [
 
 urlpatterns = [
     # Rutas de autenticación
-    path('login/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),  # Login (Genera token)
-    path('logout/', LogoutView.as_view(), name='auth_logout'),  # Logout (Invalidar refresh token)
-    path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # Refresh de token
-    path('profile/', UserProfileView.as_view(), name='user-profile'),  # Obtener perfil de usuario
+    path('user/', include(auth_urls)),
 
     # Rutas de gestión de usuarios (solo para administradores)
     path('usuarios/', UserListCreateAPIView.as_view(), name='user-list-create'),  # Listar y crear usuarios
     path('usuarios/<int:pk>/', UserDetailAPIView.as_view(), name='user-detail'),  # Obtener detalles de un usuario
-    path('register/', UserCreateView.as_view(), name='user-create'),  # Registrar un nuevo usuario
+    path('usuario-actual/', UsuarioActualAPIView.as_view(), name='usuario-actual'),
+    path('profile/', UserProfileAPIView.as_view(), name='user-profile'),
 ]

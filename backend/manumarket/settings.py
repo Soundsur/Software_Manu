@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'auth_service',  # Agregar el nuevo servicio Autenticación
 ]
 
-AUTH_USER_MODEL = 'ventas.User'
+AUTH_USER_MODEL = 'auth_service.User'
 
 from datetime import timedelta
 

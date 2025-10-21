@@ -8,6 +8,7 @@ from rest_framework import status
 from .permissions import IsAdminUser  # Importamos el permiso personalizado
 from drf_yasg.utils import swagger_auto_schema
 from django.contrib.auth import get_user_model
+from rest_framework.views import APIView
 
 
 from .serializers import (
