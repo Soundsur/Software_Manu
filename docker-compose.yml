@@ -56,6 +56,19 @@ services:
     networks:
       - manumarket-network
 
+  auth_service:
+    build:
+      context: .  # Usar el Dockerfile de la raíz
+      dockerfile: Dockerfile  # Especifica que use el Dockerfile de la raíz
+    container_name: auth_service
+    volumes:
+      - ./backend:/app  # Esto monta la carpeta backend que incluye auth_service y ventas
+    ports:
+      - "8001:8000"
+    depends_on:
+      - db
+    env_file:
+      - .env
 
 volumes:
   manumarket-data:
