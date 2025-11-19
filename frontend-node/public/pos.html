@@ -575,6 +575,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // 3) URL base del backend Django
       const BACKEND_URL = "http://localhost:8000";
       const AUTH_URL = "http://localhost:8001";
+      const TRANS_URL = "http://localhost:8002";
 
       const token = localStorage.getItem("token");
       const headers = token
@@ -859,7 +860,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         try {
           // 8.1) Crear transacción
-          const respCrear = await fetch(`${BACKEND_URL}/ventas/transacciones/`, {
+          const respCrear = await fetch(`${TRANS_URL}/trans/transacciones/`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -885,7 +886,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
           // 8.2) Confirmar transacción
           const respConfirm = await fetch(
-            `${BACKEND_URL}/ventas/transacciones/${transaccionId}/confirmar/`,
+            `${TRANS_URL}/trans/transacciones/${transaccionId}/confirmar/`,
             {
               method: "POST",
               headers: {

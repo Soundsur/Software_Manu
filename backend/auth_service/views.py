@@ -10,6 +10,7 @@ from drf_yasg.utils import swagger_auto_schema
 from django.contrib.auth import get_user_model
 from rest_framework.views import APIView
 from .bus_communication import BusCommunication  # Importa la clase BusCommunication
+from django.shortcuts import get_object_or_404
 
 from .serializers import (
     UserSerializer,
@@ -28,6 +29,7 @@ User = get_user_model()
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+    
 
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]

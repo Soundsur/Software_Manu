@@ -10,3 +10,4 @@ tzdata==2025.2
 pytz==2025.2
 drf-yasg
 psycopg2-binary
+requests==2.26.0

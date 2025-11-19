@@ -482,6 +482,8 @@
     // BASE URL de tu API Django (ventas_api)
     const BACKEND_URL = "http://localhost:8000";
     const AUTH_URL = "http://localhost:8001";
+    const TRANS_URL = "http://localhost:8002";
+
     const token = localStorage.getItem("token");
     
     // Headers con autorización
@@ -563,7 +565,7 @@
           params.append("producto", productoInput.value.trim());
         }
 
-        const resp = await fetch(`${BACKEND_URL}/ventas/historial-ventas/${params.toString() ? "?" + params : ""}`, {
+        const resp = await fetch(`${TRANS_URL}/trans/historial-ventas/${params.toString() ? "?" + params : ""}`, {
           method: "GET",
           headers
         });
@@ -670,7 +672,7 @@
       try {
         mostrarLoading();
         
-        const resp = await fetch(`${BACKEND_URL}/ventas/transacciones/${transaccionId}/detalle/`, {
+        const resp = await fetch(`${TRANS_URL}/trans/transacciones/${transaccionId}/detalle/`, {
           method: "GET",
           headers
         });

@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     "corsheaders",
     'drf_yasg',
     'auth_service',  # Agregar el nuevo servicio Autenticación
+    'trans_service',  # Agregar el servicio de Transacciones
 ]
 
 AUTH_USER_MODEL = 'auth_service.User'
@@ -177,4 +179,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8001",      # Swagger backend si usas otro puerto
     "http://localhost:4321",      # otro dominio/puerto si usas
     # Puedes agregar otros dominios que uses en pruebas
+    "http://localhost:8000",     # Django default port
+    "http://localhost:5000"       # Bus de servicios
+    
 ]

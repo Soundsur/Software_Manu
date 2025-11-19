@@ -570,8 +570,8 @@ document.getElementById("userInfo").textContent = `${displayName} (${roleName})`
         try {
           setLoading(true);
           const url = isEditing 
-            ? `${BACKEND_URL}/ventas/usuarios/${userId}/`
-            : `${BACKEND_URL}/ventas/usuarios/`;
+            ? `${AUTH_URL}/auth/usuarios/${userId}/`
+            : `${AUTH_URL}/auth/usuarios/`;
           
           const method = isEditing ? "PUT" : "POST";
           

@@ -31,8 +31,13 @@ services:
     depends_on:
       - db
       - bus  # Asegurando que el backend dependa del BUS
+      - auth
     env_file:
       - .env
+    environment:
+      - BUS_HOST=bus
+      - BUS_PORT=5000
+      - SIMPLEJWT_SIGNING_KEY=${SIMPLEJWT_SIGNING_KEY}
     networks:
       - manumarket-network  # Asegurarse de que esté en la misma red
 
@@ -62,11 +67,11 @@ services:
     networks:
       - manumarket-network
 
-  auth_service:
+  auth:
     build:
       context: .  # Usar el Dockerfile de la raíz
       dockerfile: Dockerfile  # Especifica que use el Dockerfile de la raíz
-    container_name: auth_service
+    container_name: auth
     restart: always
     volumes:
       - ./backend:/app  # Esto monta la carpeta backend que incluye auth_service y ventas
@@ -74,8 +79,31 @@ services:
       - "8001:8000"
     depends_on:
       - db
+      - bus  # Asegurando que el backend dependa del BUS
     env_file:
       - .env
+    environment:
+      - PYTHONUNBUFFERED=1
+      - BUS_HOST=bus
+      - BUS_PORT=5000
+      - SIMPLEJWT_SIGNING_KEY=${SIMPLEJWT_SIGNING_KEY}
+    networks:
+      - manumarket-network  # Asegurarse de que esté en la misma red
+
+  trans_service:
+    build:
+      context: .  # Usar el Dockerfile de la raíz
+      dockerfile: Dockerfile  # Especifica que use el Dockerfile de la raíz
+    container_name: trans_service
+    restart: always
+    volumes:
+      - ./backend:/app  # Esto monta la carpeta backend que incluye trans_service
+    ports:
+      - "8002:8000"
+    depends_on:
+      - db
+    env_file:
+      - .env  
     networks:
       - manumarket-network  # Asegurarse de que esté en la misma red
 

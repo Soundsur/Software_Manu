@@ -37,5 +37,6 @@ urlpatterns = [
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('ventas/', include('ventas.urls')),
+    path('trans/', include('trans_service.urls')),
     path('auth/', include('auth_service.urls')),  # Incluir rutas de autenticación
 ]

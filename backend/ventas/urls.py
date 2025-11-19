@@ -2,13 +2,7 @@
 
 from django.urls import path, include
 from .views import (
-    # Transacciones:
-    TransaccionCreateAPIView,
-    TransaccionDetailAPIView,
-    ConfirmarTransaccionAPIView,    # Nuevo endpoint historial
-    HistorialVentasAPIView,
-    TransaccionDetalleAPIView,    # CRUD Productos y Stocks:
-    ProductoListCreateAPIView,
+    ProductoListCreateAPIView, # CRUD Productos y Stocks:
     ProductoDetailAPIView,
     ProductoBulkImportAPIView,
     ProductoBulkUpdateAPIView,
@@ -23,15 +17,8 @@ from .views import (
 
 urlpatterns = [
 
-    # --- Gestión de Transacciones ---
-    # 1) Crear una Transacción (con lista de items y descuento global):
-    path('transacciones/', TransaccionCreateAPIView.as_view(), name='transaccion-create'),
-    # 2) Obtener detalle de transacción (incluye items, totales y descuento):
-    path('transacciones/<int:pk>/', TransaccionDetailAPIView.as_view(), name='transaccion-detail'),
-    # 3) Confirmar la transacción (verificar stock y descontar):
-    path('transacciones/<int:pk>/confirmar/', ConfirmarTransaccionAPIView.as_view(), name='transaccion-confirmar'),    # Historial de Ventas
-    path('historial-ventas/', HistorialVentasAPIView.as_view(), name='historial-ventas'),
-    path('transacciones/<int:transaccion_id>/detalle/', TransaccionDetalleAPIView.as_view(), name='transaccion-detalle'),    # --- CRUD Productos ---
+
+    # --- CRUD Productos ---
     path('productos/', ProductoListCreateAPIView.as_view(), name='producto-list-create'),
     path('productos/<int:pk>/', ProductoDetailAPIView.as_view(), name='producto-detail'),
     path('productos/bulk-import/', ProductoBulkImportAPIView.as_view(), name='producto-bulk-import'),
@@ -45,7 +32,6 @@ urlpatterns = [
     # --- Metricas de venta ---
     path('dashboard/metrics/', DashboardMetricsView.as_view(), name='dashboard-metrics'),
     path('metrics/', MetricsView.as_view(), name='metrics'),
-    # En urls.py, añade esto a urlpatterns
     path('metrics/chart/', SalesChartDataView.as_view(), name='sales-chart-data'),
 ]
 
